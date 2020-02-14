@@ -1,0 +1,4 @@
+[Added Associations]
+application/csv=libreoffice-calc.desktop
+application/vnd.oasis.opendocument.database=libreoffice-base.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
