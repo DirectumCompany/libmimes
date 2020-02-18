@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+#include "../exceptions/file_not_found_exception.hpp"
 #include "../helpers/command.hpp"
 #include "../helpers/string.hpp"
 
@@ -13,6 +14,9 @@ namespace helpers {
     }
 
     std::string file::get_mime_type(const std::string &file_path) {
+        if (!is_exists(file_path))
+            throw exceptions::file_not_found_exception(file_path);
+
         // Получить результат выполнения команды file -i <file_path>
         helpers::command command("file");
         command.add_param("-i", file_path);
