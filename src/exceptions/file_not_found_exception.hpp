@@ -10,9 +10,9 @@ namespace exceptions {
      */
     struct file_not_found_exception : std::exception {
         /**
-         * Сообщение об ошибке.
+         * Путь к файлу, который не был найден.
          */
-        std::string m_error;
+        std::string m_file_path;
 
     public:
         const char *what() const noexcept override;
@@ -20,10 +20,10 @@ namespace exceptions {
         /**
          * Конструктор.
          *
-         * @param error Сообщение об ошибке.
+         * @param file_path Путь к файлу, который не был найден.
          */
         explicit
-        file_not_found_exception(std::string error);
+        file_not_found_exception(std::string file_path);
 
     };
 }

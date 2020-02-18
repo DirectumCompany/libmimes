@@ -11,10 +11,10 @@ namespace helpers {
         /**
          * Проверить наличие файла в файловой системе.
          *
-         * @param file_name Абсолютный путь к файлу.
+         * @param file_path Абсолютный путь к файлу.
          * @return true - файл найден в файловой системе, иначе false.
          */
-        static bool is_exists(const std::string &file_name);
+        static bool is_exists(const std::string &file_path);
     };
 }
 

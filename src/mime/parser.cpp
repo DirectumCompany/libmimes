@@ -28,13 +28,13 @@ namespace mime {
         return {mime_type, applications};
     }
 
-    applications_list parser::parse_file(const std::string &file_name) {
+    applications_list parser::parse_file(const std::string &file_path) {
         applications_list result;
 
-        if (!helpers::file::is_exists(file_name))
-            throw exceptions::file_not_found_exception("File not found: " + file_name);
+        if (!helpers::file::is_exists(file_path))
+            throw exceptions::file_not_found_exception("File not found: " + file_path);
 
-        std::ifstream mime_apps_file(file_name);
+        std::ifstream mime_apps_file(file_path);
         std::string token;
         auto current_section = section::added_associations;
 

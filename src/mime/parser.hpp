@@ -23,10 +23,10 @@ namespace mime {
         /**
          * Разобрать файл mimeapps.list
          *
-         * @param file_name Абсолютный путь к файлу.
+         * @param file_path Абсолютный путь к файлу.
          * @return Представление файла в виде структуры.
          */
-        static applications_list parse_file(const std::string &file_name);
+        static applications_list parse_file(const std::string &file_path);
 
     private:
         static constexpr auto get_added_associations_section_name();
