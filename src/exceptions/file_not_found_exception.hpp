@@ -1,22 +1,13 @@
 #ifndef LIBMIMES_FILE_NOT_FOUND_EXCEPTION_HPP
 #define LIBMIMES_FILE_NOT_FOUND_EXCEPTION_HPP
 
-#include <exception>
-#include <string>
+#include "base_exception.hpp"
 
 namespace exceptions {
     /**
      * Исключение о недоступности файла.
      */
-    struct file_not_found_exception : std::exception {
-        /**
-         * Путь к файлу, который не был найден.
-         */
-        std::string m_file_path;
-
-    public:
-        const char *what() const noexcept override;
-
+    struct file_not_found_exception : base_exception {
         /**
          * Конструктор.
          *
@@ -24,7 +15,6 @@ namespace exceptions {
          */
         explicit
         file_not_found_exception(std::string file_path);
-
     };
 }
 

@@ -15,6 +15,14 @@ namespace helpers {
          * @return true - файл найден в файловой системе, иначе false.
          */
         static bool is_exists(const std::string &file_path);
+
+        /**
+         * Получить MIME-тип файла.
+         *
+         * @param file_path Абсолютный путь к файлу.
+         * @return MIME-тип файала.
+         */
+        static std::string get_mime_type(const std::string &file_path);
     };
 }
 
