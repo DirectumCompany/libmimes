@@ -8,9 +8,7 @@
 
 namespace mime {
 
-    constexpr auto mime_cache_parser::get_mime_cache_header() {
-        return "[MIME Cache]";
-    }
+    const std::string mime_cache_parser::m_mime_cache_header = "[MIME Cache]";
 
     std::pair<std::string, std::vector<std::string>> mime_cache_parser::parse_string(const std::string &source) {
         auto string_tokens = helpers::string::split(source, '=');
@@ -29,7 +27,7 @@ namespace mime {
         std::string row;
 
         while (getline(mime_cache_file, row)) {
-            if (!row.empty() && row != get_mime_cache_header()) {
+            if (!row.empty() && row != m_mime_cache_header) {
                 result.associations.insert(parse_string(row));
             }
         }

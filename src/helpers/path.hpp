@@ -27,7 +27,7 @@ namespace helpers {
         /**
          * Разделитель папок в файловой системе.
          */
-        static char m_delimiter;
+        static const char m_delimiter;
     };
 }
 

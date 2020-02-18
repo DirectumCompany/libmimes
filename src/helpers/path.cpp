@@ -5,7 +5,7 @@
 
 namespace helpers {
 
-    char path::m_delimiter = '/';
+    const char path::m_delimiter = '/';
 
     std::string path::get_current_working_directory() {
         char buff[FILENAME_MAX];

@@ -25,7 +25,10 @@ namespace mime {
         static mime_cache parse_file(const std::string &file_path);
 
     private:
-        static constexpr auto get_mime_cache_header();
+        /**
+         * Заголовок основной секции файла mimeapps.list
+         */
+        static const std::string m_mime_cache_header;
     };
 }
 
