@@ -48,6 +48,11 @@ namespace mime {
          * Время последнего изменения файла кэша.
          */
         time_t m_mime_cache_last_modification_date;
+
+        /**
+         * Уничтожить кэш из памяти.
+         */
+        void destroy_cache();
     };
 }
 
