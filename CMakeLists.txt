@@ -6,3 +6,4 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(test-app)
