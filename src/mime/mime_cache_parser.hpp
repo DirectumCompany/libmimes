@@ -1,28 +1,21 @@
 #ifndef LIBMIMES_MIME_CACHE_PARSER_HPP
 #define LIBMIMES_MIME_CACHE_PARSER_HPP
 
+#include "base_parser.hpp"
 #include "mime_cache.hpp"
 
 namespace mime {
     /**
      * Парсер файлов кэша MIME-типов.
      */
-    struct mime_cache_parser {
-        /**
-         * Разобрать строку из файла mimeapps.list
-         *
-         * @param source Исходная строка.
-         * @return Пара ключ-значение. Ключ - MIME-тип, значение - список приложений.
-         */
-        static std::pair<std::string, std::vector<std::string>> parse_string(const std::string &source);
-
+    struct mime_cache_parser : base_parser {
         /**
          * Разобрать файл кэша ассоциаций.
          *
          * @param file_path Абсолютный путь к файлу.
          * @return Список ассоциаций из файла кэша.
          */
-        static mime_cache* parse_file(const std::string &file_path);
+        static mime_cache *parse_file(const std::string &file_path);
 
     private:
         /**
