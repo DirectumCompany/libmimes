@@ -10,7 +10,7 @@ set(SOURCES
         helpers/string.cpp helpers/string.hpp
         mime/mime_cache_parser.cpp mime/mime_cache_parser.hpp
         mime/mime_cache.hpp
-        library.cpp library.hpp helpers/environment.cpp helpers/environment.hpp)
+        library.cpp library.hpp helpers/environment.cpp helpers/environment.hpp mime/mime_cache_reader.cpp mime/mime_cache_reader.hpp exceptions/file_stat_read_exception.cpp exceptions/file_stat_read_exception.hpp)
 add_library(mimes SHARED ${SOURCES})
 add_library(mimesStatic STATIC ${SOURCES})
 set_target_properties(mimesStatic PROPERTIES OUTPUT_NAME mimes)

@@ -1,8 +1,10 @@
 #include "file.hpp"
 
 #include <fstream>
+#include <sys/stat.h>
 
 #include "../exceptions/file_not_found_exception.hpp"
+#include "../exceptions/file_stat_read_exception.hpp"
 #include "../helpers/command.hpp"
 #include "../helpers/string.hpp"
 
@@ -24,5 +26,16 @@ namespace helpers {
         auto command_result_tokens = helpers::string::split(command_result);
         auto file_mime = command_result_tokens[1];
         return file_mime.substr(0, file_mime.size() - 1);
+    }
+
+    time_t file::get_last_modification_date(const std::string &file_path) {
+        if (!is_exists(file_path))
+            throw exceptions::file_not_found_exception(file_path);
+
+        struct stat result{};
+        if (stat(file_path.c_str(), &result) == 0) {
+            return result.st_mtime;
+        }
+        throw exceptions::file_stat_read_exception();
     }
 }

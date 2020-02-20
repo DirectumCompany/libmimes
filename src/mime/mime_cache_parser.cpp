@@ -17,18 +17,18 @@ namespace mime {
         return {mime_type, applications};
     }
 
-    mime_cache mime_cache_parser::parse_file(const std::string &file_path) {
+    mime_cache* mime_cache_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
             throw exceptions::file_not_found_exception(file_path);
 
-        mime_cache result;
+        auto result = new mime_cache();
 
         std::ifstream mime_cache_file(file_path);
         std::string row;
 
         while (getline(mime_cache_file, row)) {
             if (!row.empty() && row != m_mime_cache_header) {
-                result.associations.insert(parse_string(row));
+                result->associations.insert(parse_string(row));
             }
         }
 

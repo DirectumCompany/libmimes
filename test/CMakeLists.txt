@@ -9,7 +9,7 @@ set(SOURCES
         mime/mime_cache_parser__parse_file.cpp
         helpers/command__get_command_text.cpp
         helpers/command__execute.cpp
-        helpers/file__get_mime_type.cpp)
+        helpers/file__get_mime_type.cpp library.cpp)
 add_executable(mimes_test ${SOURCES})
 target_include_directories(mimes_test PUBLIC ../src ${GTEST_INCLUDE_DIRS})
 target_link_libraries(mimes_test ${GTEST_LIBRARIES} pthread mimes)

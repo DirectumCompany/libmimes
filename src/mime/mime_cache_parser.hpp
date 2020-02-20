@@ -22,7 +22,7 @@ namespace mime {
          * @param file_path Абсолютный путь к файлу.
          * @return Список ассоциаций из файла кэша.
          */
-        static mime_cache parse_file(const std::string &file_path);
+        static mime_cache* parse_file(const std::string &file_path);
 
     private:
         /**
