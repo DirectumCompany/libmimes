@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-#include "../exceptions/file_not_found_exception.hpp"
+#include "../exceptions/cannot_found_exception.hpp"
 #include "../helpers/file.hpp"
 #include "mime_applications_file_section.hpp"
 
@@ -14,7 +14,7 @@ namespace mime {
 
     mime_applications *mime_applications_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
-            throw exceptions::file_not_found_exception(file_path);
+            throw exceptions::cannot_found_exception(file_path);
 
         auto result = new mime_applications();
         std::ifstream mime_apps_file(file_path);

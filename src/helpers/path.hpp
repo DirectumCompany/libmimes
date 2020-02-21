@@ -2,6 +2,7 @@
 #define LIBMIMES_PATH_HPP
 
 #include <string>
+#include <vector>
 
 namespace helpers {
     /**
@@ -14,6 +15,14 @@ namespace helpers {
          * @return Абсолютный путь к папке, где находится текущий бинарный файл.
          */
         static std::string get_current_working_directory();
+
+        /**
+         * Извлечь имя файла из пути.
+         *
+         * @param file_path Путь к файлу.
+         * @return Имя файла с расширением.
+         */
+        static std::string extract_file_name(const std::string &file_path);
 
         /**
          * Объединить пути.

@@ -15,4 +15,11 @@ namespace helpers {
 
         return result;
     }
+
+    bool string::ends_with(const std::string &source, const std::string &ending) {
+        if (source.size() >= ending.size()) {
+            return (0 == source.compare (source.size() - ending.size(), ending.size(), ending));
+        }
+        return false;
+    }
 }
