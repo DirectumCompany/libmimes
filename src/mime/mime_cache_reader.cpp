@@ -49,8 +49,7 @@ namespace mime {
             // Получить максимальную дату изменения
             time_t last_modification_date = 0;
             for (const auto &path: pathes) {
-                auto file_modification_date = helpers::file::get_last_modification_date(
-                        helpers::environment::mime_cache_file_path);
+                auto file_modification_date = helpers::file::get_last_modification_date(path);
                 if (last_modification_date < file_modification_date) {
                     last_modification_date = file_modification_date;
                 }
