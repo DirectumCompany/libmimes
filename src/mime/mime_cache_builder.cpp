@@ -4,11 +4,11 @@
 
 namespace mime {
 
-    void mime_cache_builder::apply_overrides(mime::mime_cache *mime_cache,
-                                             const mime::mime_applications &overrides_list) {
+    void mime_cache_builder::apply_overrides(mime_cache *const mime_cache,
+                                             const mime_applications *const overrides_list) {
 
         // Добавить переопределения из секции [Default Applications]
-        for (const auto &item: overrides_list.default_applications) {
+        for (const auto &item: overrides_list->default_applications) {
             if (mime_cache->associations.find(item.first) == mime_cache->associations.end()) {
                 mime_cache->associations[item.first] = std::vector<std::string>();
             }
@@ -17,7 +17,7 @@ namespace mime {
         }
 
         // Применить секцию [Removed Associations]
-        for (const auto &item: overrides_list.removed_associations) {
+        for (const auto &item: overrides_list->removed_associations) {
             auto iterator = mime_cache->associations.find(item.first);
             if (iterator != mime_cache->associations.end()) {
                 // Попробуем найти элементы из списка удаленных ассоциаций
@@ -32,7 +32,7 @@ namespace mime {
         }
 
         // Добавить переопределения из секции [Added Associations]
-        for (const auto &item: overrides_list.added_associations) {
+        for (const auto &item: overrides_list->added_associations) {
             auto iterator = mime_cache->associations.find(item.first);
             if (mime_cache->associations.find(item.first) == mime_cache->associations.end()) {
                 mime_cache->associations[item.first] = std::vector<std::string>();
@@ -45,7 +45,7 @@ namespace mime {
         remove_empty_entries(mime_cache);
     }
 
-    mime_cache *mime_cache_builder::from_mime_applications(const mime_applications &applications_list) {
+    mime_cache *mime_cache_builder::from_mime_applications(mime_applications *applications_list) {
         auto result = new mime_cache();
         apply_overrides(result, applications_list);
         return result;

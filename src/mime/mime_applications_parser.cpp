@@ -12,7 +12,7 @@ namespace mime {
     const std::string mime_applications_parser::removed_associations_section_name = "[Removed Associations]";
     const std::string mime_applications_parser::default_applications_section_name = "[Default Applications]";
 
-    mime_applications * mime_applications_parser::parse_file(const std::string &file_path) {
+    mime_applications *mime_applications_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
             throw exceptions::file_not_found_exception(file_path);
 
