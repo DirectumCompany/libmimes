@@ -9,6 +9,6 @@ int main(int argc, char **argv) {
 
     auto mime_type = get_mime_type(argv[1]);
     auto associations = get_mime_type_associations(mime_type);
-    std::cout << mime_type << ": " << associations[0] << std::endl;
+    std::cout << mime_type << ": " << (associations.empty() ? "Association not found" : associations[0]) << std::endl;
     return 0;
 }

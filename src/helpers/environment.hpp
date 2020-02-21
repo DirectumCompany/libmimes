@@ -24,11 +24,20 @@ namespace helpers {
         static std::string compute_user_overrides_mime_apps_path();
 
         /**
-         * Вычислить путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
-         *
-         * @return /usr/share/applications/defaults.list
+         * Вычислить путь к устаревшему файлу с пользовательскими переопределениями mimeapps.list
+         * @return Абсолютный путь ~/.config/mimeapps.list
+         */
+        static std::string compute_deferred_user_overrides_mime_apps_path();
+
+        /**
+         * Путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
          */
         static const std::string distribution_defaults_apps_path;
+
+        /**
+         * Путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
+         */
+        static const std::string distribution_mime_apps_path;
 
         /**
          * Путь к файлу кэша ассоциаций MIME-типов.

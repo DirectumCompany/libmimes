@@ -42,6 +42,12 @@ namespace mime {
             if (helpers::file::is_exists(helpers::environment::distribution_defaults_apps_path)) {
                 pathes.emplace_back(helpers::environment::distribution_defaults_apps_path);
             }
+            if (helpers::file::is_exists(helpers::environment::distribution_mime_apps_path)) {
+                pathes.emplace_back(helpers::environment::distribution_mime_apps_path);
+            }
+            if (helpers::file::is_exists(helpers::environment::compute_deferred_user_overrides_mime_apps_path())) {
+                pathes.emplace_back(helpers::environment::compute_deferred_user_overrides_mime_apps_path());
+            }
             if (helpers::file::is_exists(helpers::environment::compute_user_overrides_mime_apps_path())) {
                 pathes.emplace_back(helpers::environment::compute_user_overrides_mime_apps_path());
             }
