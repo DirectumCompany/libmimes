@@ -1,5 +1,7 @@
 #include "path.hpp"
 
+#include <algorithm>
+#include <dirent.h>
 #include <cstdio>
 #include <unistd.h>
 
@@ -11,6 +13,15 @@ namespace helpers {
         char buff[FILENAME_MAX];
         getcwd(buff, FILENAME_MAX);
         return std::string(buff);
+    }
+
+    std::string path::extract_file_name(const std::string &file_path) {
+        auto position = file_path.rfind(m_delimiter);
+        if (position != std::string::npos) {
+            return file_path.substr(position + 1, file_path.size() - 1);
+        }
+
+        return file_path;
     }
 
     std::string path::join(std::initializer_list<std::string> args) {

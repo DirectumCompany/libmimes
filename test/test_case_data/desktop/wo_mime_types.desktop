@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=DIRECTUM Web Access Agent
+Exec=/usr/npocomputer/webaccessagent/Launcher %u
+Path=
+Icon=NpoComputerWebAccessAgent
+Type=Application
+Categories=Other
+Terminal=false
+Comment=
+StartupNotify=false

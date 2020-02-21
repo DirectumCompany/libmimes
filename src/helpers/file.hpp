@@ -21,7 +21,7 @@ namespace helpers {
          *
          * @param file_path Абсолютный путь к файлу.
          * @return MIME-тип файала.
-         * @throws exceptions::file_not_found_exception
+         * @throws exceptions::cannot_found_exception
          */
         static std::string get_mime_type(const std::string &file_path);
 
@@ -30,7 +30,7 @@ namespace helpers {
          *
          * @param file_path Абсолютный путь к файлу.
          * @return Время последнего изменения файла.
-         * @throws exceptions::file_not_found_exception
+         * @throws exceptions::cannot_found_exception
          * @throws exceptions::file_stat_read_exception
          */
         static time_t get_last_modification_date(const std::string &file_path);
