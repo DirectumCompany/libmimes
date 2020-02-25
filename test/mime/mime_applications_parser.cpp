@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <map>
+#include <memory>
 #include <string>
 
 #include "helpers/path.hpp"
@@ -9,7 +10,8 @@ void check_associations(const std::string &example_file_name,
                         const std::map<std::string, std::vector<std::string>> &expected_added_associations,
                         const std::map<std::string, std::vector<std::string>> &expected_removed_associations,
                         const std::map<std::string, std::vector<std::string>> &expected_default_applications) {
-    auto registered_associations = mime::mime_applications_parser::parse_file(example_file_name);
+    auto registered_associations = std::shared_ptr<mime::mime_applications>(
+            mime::mime_applications_parser::parse_file(example_file_name));
     ASSERT_EQ(registered_associations->added_associations, expected_added_associations);
     ASSERT_EQ(registered_associations->removed_associations, expected_removed_associations);
     ASSERT_EQ(registered_associations->default_applications, expected_default_applications);
