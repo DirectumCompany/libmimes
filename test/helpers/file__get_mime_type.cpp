@@ -21,3 +21,9 @@ TEST(file__get_mime_type, docx) {
     ASSERT_EQ(helpers::file::get_mime_type(file_path),
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 }
+
+TEST(file__get_mime_type, filename_with_spaces) {
+    auto file_path = helpers::path::join({helpers::path::get_current_working_directory(),
+                                          "test_case_data", "helpers", "some file"});
+    ASSERT_EQ(helpers::file::get_mime_type(file_path), "text/plain");
+}

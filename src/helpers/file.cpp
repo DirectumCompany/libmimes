@@ -21,10 +21,10 @@ namespace helpers {
 
         // Получить результат выполнения команды file -i <file_path>
         helpers::command command("file");
-        command.add_param("-i", file_path);
+        command.add_param("-i", "\"" + file_path + "\"");
         auto command_result = command.execute();
         auto command_result_tokens = helpers::string::split(command_result);
-        auto file_mime = command_result_tokens[1];
+        auto file_mime = command_result_tokens[command_result_tokens.size() - 2];
         return file_mime.substr(0, file_mime.size() - 1);
     }
 
