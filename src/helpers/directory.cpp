@@ -36,6 +36,7 @@ namespace helpers {
                     }
                 }
             }
+            closedir(dir);
         }
 
         std::sort(result.begin(), result.end());
