@@ -13,4 +13,4 @@ set(SOURCES
         library.cpp library.hpp helpers/environment.cpp helpers/environment.hpp mime/mime_cache_reader.cpp mime/mime_cache_reader.hpp exceptions/file_stat_read_exception.cpp exceptions/file_stat_read_exception.hpp mime/base_parser.cpp mime/base_parser.hpp mime/mime_applications.hpp mime/mime_applications_parser.cpp mime/mime_applications_parser.hpp mime/mime_applications_file_section.hpp mime/mime_cache_builder.cpp mime/mime_cache_builder.hpp desktop/desktop_parser.cpp desktop/desktop_parser.hpp desktop/desktop_finder.cpp desktop/desktop_finder.hpp desktop/desktop_entry.hpp helpers/directory.cpp helpers/directory.hpp)
 add_library(mimes SHARED ${SOURCES})
 add_library(mimesStatic STATIC ${SOURCES})
-set_target_properties(mimesStatic PROPERTIES OUTPUT_NAME mimes)
+set_target_properties(mimesStatic PROPERTIES OUTPUT_NAME mimes POSITION_INDEPENDENT_CODE ON)
