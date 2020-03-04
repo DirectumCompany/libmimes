@@ -25,3 +25,7 @@ TEST(path__join, multiple_params_wo_delimiter) {
 TEST(path__join, multiple_delimiters) {
     ASSERT_EQ(helpers::path::join({"/usr/", "/bin"}), "/usr/bin");
 }
+
+TEST(path__join, wo_slash_at_begin) {
+    ASSERT_EQ(helpers::path::join({"directory", "file"}), "directory/file");
+}

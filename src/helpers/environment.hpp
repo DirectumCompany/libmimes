@@ -55,7 +55,12 @@ namespace helpers {
         /**
          * Путь к системной папке приложений.
          */
-        static const std::string system_application_folder;
+        static const std::string system_application_path;
+
+        /**
+         * Путь к системной папке базы MIME-типов.
+         */
+        static const std::string system_mime_database_path;
 
 
     };

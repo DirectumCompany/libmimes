@@ -15,6 +15,15 @@ struct library {
     static std::string get_mime_type(const std::string &file_path);
 
     /**
+     * Получить MIME-тип указанного файла по расширению.
+     *
+     * @param file_pathАбсолютный путь к файлу.
+     * @return MIME-type файла.
+     * @throws exceptions::cannot_found_exception
+     */
+    static std::string get_mime_type_by_extension(const std::string &file_path);
+
+    /**
      * Получить назначенные ассоциации с указанным MIME-типом.
      * @param mime_type MIME-тип.
      * @return Список назначенных ассоциаций из кэша ОС.

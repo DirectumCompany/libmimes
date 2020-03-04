@@ -26,6 +26,23 @@ namespace helpers {
          * @return true - если строка заканчивается на указанную, иначе false.
          */
         static bool ends_with(const std::string &source, const std::string &ending);
+
+        /**
+         * Проверить, что строка начинается на другую строку.
+         *
+         * @param source Исходная строка.
+         * @param ending Строка, с которой должна начаться исходная.
+         * @return true - если строка начинается на указанную, иначе false.
+         */
+        static bool starts_with(const std::string &source, const std::string &starting);
+
+        /**
+         * Обрезать пробельные символы слева.
+         *
+         * @param source Исходная строка.
+         * @return Строка, не содержащая пробелов в начале.
+         */
+        static std::string ltrim(std::string source);
     };
 }
 

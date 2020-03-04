@@ -45,6 +45,7 @@ namespace mime {
                 }
             }
         }
+        mime_apps_file.close();
 
         return result;
     }

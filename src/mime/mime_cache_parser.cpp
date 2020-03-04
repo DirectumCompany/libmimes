@@ -24,6 +24,7 @@ namespace mime {
                 result->associations.insert(parse_string(row));
             }
         }
+        mime_cache_file.close();
 
         return result;
     }
