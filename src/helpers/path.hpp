@@ -25,6 +25,14 @@ namespace helpers {
         static std::string extract_file_name(const std::string &file_path);
 
         /**
+         * Извлечь расширение файла.
+         *
+         * @param file_path Путь к файлу.
+         * @return Расширение файла.
+         */
+        static std::string extract_file_extension(const std::string &file_path);
+
+        /**
          * Объединить пути.
          *
          * @param args Список путей для объединения.

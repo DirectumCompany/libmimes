@@ -12,7 +12,9 @@ namespace helpers {
 
     bool file::is_exists(const std::string &file_path) {
         std::ifstream file_stream(file_path);
-        return file_stream.good();
+        bool result = file_stream.good();
+        file_stream.close();
+        return result;
     }
 
     std::string file::get_mime_type(const std::string &file_path) {

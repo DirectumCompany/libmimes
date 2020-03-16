@@ -29,6 +29,7 @@ namespace desktop {
                 }
             }
         }
+        desktop_file_stream.close();
 
         return result;
     }

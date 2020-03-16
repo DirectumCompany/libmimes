@@ -13,13 +13,12 @@ namespace desktop {
 
         // Получить приложения из папки пользователя
         std::vector<std::string> paths{helpers::environment::compute_user_application_folder(),
-                                       helpers::environment::system_application_folder};
+                                       helpers::environment::system_application_path};
 
         for (const auto &directory_path: paths) {
             if (helpers::directory::is_exists(directory_path)) {
-                auto file_names = helpers::directory::get_file_names(directory_path, ".desktop");
-                for (const auto &file_name: file_names) {
-                    auto absolute_file_path = helpers::path::join({directory_path, file_name});
+                auto absolute_file_names = helpers::directory::get_file_names(directory_path, ".desktop");
+                for (const auto &absolute_file_path: absolute_file_names) {
                     auto desktop_file = desktop_parser::parse_file(absolute_file_path);
                     if (std::find(desktop_file.supported_mime_types.begin(), desktop_file.supported_mime_types.end(),
                                   mime_type) != desktop_file.supported_mime_types.end()) {

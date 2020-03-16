@@ -1,12 +1,25 @@
 #include "library.hpp"
 
+#include <algorithm>
+
 #include "desktop/desktop_finder.hpp"
 #include "helpers/environment.hpp"
 #include "helpers/file.hpp"
+#include "helpers/path.hpp"
 #include "mime/mime_cache_reader.hpp"
+#include "mime/mime_database_reader.hpp"
 
 std::string library::get_mime_type(const std::string &file_path) {
     return helpers::file::get_mime_type(file_path);
+}
+
+std::string library::get_mime_type_by_extension(const std::string &file_path) {
+    auto extension = helpers::path::extract_file_extension(file_path);
+    std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+    auto database = mime::mime_database_reader::get_instance()->get_actual_database();
+    return database[extension];
 }
 
 std::vector<std::string> library::get_mime_type_associations(const std::string &mime_type) {

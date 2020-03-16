@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <unistd.h>
 
+#include "string.hpp"
+
 namespace helpers {
 
     const char path::m_delimiter = '/';
@@ -24,11 +26,20 @@ namespace helpers {
         return file_path;
     }
 
+    std::string path::extract_file_extension(const std::string &file_path) {
+        auto file_name = extract_file_name(file_path);
+        auto tokens = string::split(file_name, '.');
+        if (tokens.size() > 1) {
+            return tokens[tokens.size() - 1];
+        }
+        return "";
+    }
+
     std::string path::join(std::initializer_list<std::string> args) {
         std::string result;
 
         for (const auto &item: args) {
-            if (result[result.size() - 1] != m_delimiter && item[0] != m_delimiter) {
+            if (result[result.size() - 1] != m_delimiter && item[0] != m_delimiter && !result.empty()) {
                 result += m_delimiter;
             }
 
