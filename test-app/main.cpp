@@ -5,7 +5,7 @@ void print_mime_type_info(const std::string &mime_type) {
     std::cout << "Mime type: " << mime_type << std::endl;
 
     auto associations = library::get_mime_type_associations(mime_type);
-    std::cout << "Mime apps: " << std::endl;
+    std::cout << "Associations from MIME-database: " << std::endl;
     if (associations.empty()) {
         std::cout << "\tAssociations not found" << std::endl;
     } else {
