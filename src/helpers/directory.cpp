@@ -33,12 +33,12 @@ namespace helpers {
                 if (ent->d_type == DT_REG) {
                     file_name = ent->d_name;
                     if (extension.empty() || helpers::string::ends_with(file_name, extension)) {
-                        result.emplace_back(helpers::path::join({directory_path, file_name}));
+                        result.emplace_back(helpers::path::join(directory_path, file_name));
                     }
                 } else if (ent->d_type == DT_DIR) {
                     auto subdirectory_name = std::string(ent->d_name);
                     if (subdirectory_name != "." && subdirectory_name != "..") {
-                        auto subdirectory_path = helpers::path::join({directory_path, subdirectory_name});
+                        auto subdirectory_path = helpers::path::join(directory_path, subdirectory_name);
                         auto subdirectory_files = get_file_names(subdirectory_path, extension);
                         result.insert(result.end(), subdirectory_files.begin(), subdirectory_files.end());
                     }

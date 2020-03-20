@@ -33,18 +33,39 @@ namespace helpers {
         static std::string extract_file_extension(const std::string &file_path);
 
         /**
-         * Объединить пути.
+         * Объединение путей.
          *
-         * @param args Список путей для объединения.
-         * @return Путь, полученный в результате конкатенации.
+         * @param first Первый путь для объединения.
+         * @param other Дальнейший перечень путей для объединения.
+         * @return Результат объединения. Функция производит чистку от дублирующихся разделителей.
          */
-        static std::string join(std::initializer_list<std::string> args);
+        template<typename ...Ts>
+        static std::string join(const std::string &first, const Ts &... other) {
+            std::string result = first + m_delimiter + join(other...);
+            remove_double_delimiter(result);
+            return result;
+        }
+
+        /**
+         * Замыкание вариативного шаблона объединения путей.
+         *
+         * @param source Исходный путь.
+         * @return Путь в неизменном виде.
+         */
+        static std::string join(const std::string &source);
 
     private:
         /**
          * Разделитель папок в файловой системе.
          */
         static const char m_delimiter;
+
+        /**
+         * Удалить двойной разделитель из пути.
+         *
+         * @param source Исходная строка, для которой проводятся изменения.
+         */
+        static void remove_double_delimiter(std::string &source);
     };
 }
 

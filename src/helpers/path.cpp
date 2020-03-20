@@ -35,23 +35,16 @@ namespace helpers {
         return "";
     }
 
-    std::string path::join(std::initializer_list<std::string> args) {
-        std::string result;
+    std::string path::join(const std::string &source) {
+        return source;
+    }
 
-        for (const auto &item: args) {
-            if (result[result.size() - 1] != m_delimiter && item[0] != m_delimiter && !result.empty()) {
-                result += m_delimiter;
-            }
-
-            result += item;
+    void path::remove_double_delimiter(std::string &source) {
+        const static std::string double_delimiter = "//";
+        size_t position = source.find(double_delimiter);
+        while (position != std::string::npos) {
+            source.replace(position, double_delimiter.size(), {m_delimiter});
+            position = source.find(double_delimiter);
         }
-
-        std::string double_delimiter = "//";
-        size_t position = result.find(double_delimiter);
-        if (position != std::string::npos) {
-            result.replace(position, double_delimiter.size(), {m_delimiter});
-        }
-
-        return result;
     }
 }

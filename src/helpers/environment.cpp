@@ -18,16 +18,16 @@ namespace helpers {
 
     std::string environment::compute_user_overrides_mime_apps_path() {
         auto home_folder_path = get_environment_variable_value("HOME");
-        return path::join({home_folder_path, ".config", "mimeapps.list"});
+        return path::join(home_folder_path, ".config", "mimeapps.list");
     }
 
     std::string environment::compute_deferred_user_overrides_mime_apps_path() {
         auto home_folder_path = get_environment_variable_value("HOME");
-        return path::join({home_folder_path, ".local", "share", "applications", "mimeapps.list"});
+        return path::join(home_folder_path, ".local", "share", "applications", "mimeapps.list");
     }
 
     std::string environment::compute_user_application_folder() {
         auto home_folder_path = get_environment_variable_value("HOME");
-        return path::join({home_folder_path, ".local", "share", "applications"});
+        return path::join(home_folder_path, ".local", "share", "applications");
     }
 }

@@ -19,7 +19,7 @@ void check_associations(const std::string &example_file_name,
 
 TEST(mime_applications_parser__parse, only_defaults) {
     auto current_directory = helpers::path::get_current_working_directory();
-    auto example_file_name = helpers::path::join({current_directory, "/test_case_data/mime/parser/only_defaults.list"});
+    auto example_file_name = helpers::path::join(current_directory, "/test_case_data/mime/parser/only_defaults.list");
     std::map<std::string, std::vector<std::string>> default_applications = {
             {"application/csv",                                                         {"libreoffice-calc.desktop"}},
             {"application/vnd.oasis.opendocument.database",                             {"libreoffice-base.desktop"}},
@@ -30,7 +30,7 @@ TEST(mime_applications_parser__parse, only_defaults) {
 
 TEST(mime_applications_parser__parse, only_added) {
     auto current_directory = helpers::path::get_current_working_directory();
-    auto example_file_name = helpers::path::join({current_directory, "/test_case_data/mime/parser/only_added.list"});
+    auto example_file_name = helpers::path::join(current_directory, "/test_case_data/mime/parser/only_added.list");
     std::map<std::string, std::vector<std::string>> added_associations = {
             {"application/csv",                                                         {"libreoffice-calc.desktop"}},
             {"application/vnd.oasis.opendocument.database",                             {"libreoffice-base.desktop"}},
@@ -41,7 +41,7 @@ TEST(mime_applications_parser__parse, only_added) {
 
 TEST(mime_applications_parser__parse, only_removed) {
     auto current_directory = helpers::path::get_current_working_directory();
-    auto example_file_name = helpers::path::join({current_directory, "/test_case_data/mime/parser/only_removed.list"});
+    auto example_file_name = helpers::path::join(current_directory, "/test_case_data/mime/parser/only_removed.list");
     std::map<std::string, std::vector<std::string>> removed_associations = {
             {"application/csv",                                                         {"libreoffice-calc.desktop"}},
             {"application/vnd.oasis.opendocument.database",                             {"libreoffice-base.desktop"}},
