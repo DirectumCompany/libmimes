@@ -7,13 +7,43 @@ namespace mime {
     void mime_cache_builder::apply_overrides(mime_cache *const mime_cache,
                                              const mime_applications *const overrides_list) {
 
+        std::map<std::string, std::vector<std::string>> temporary_associations;
+
         // Добавить переопределения из секции [Default Applications]
         for (const auto &item: overrides_list->default_applications) {
-            if (mime_cache->associations.find(item.first) == mime_cache->associations.end()) {
-                mime_cache->associations[item.first] = std::vector<std::string>();
+            temporary_associations[item.first] = std::vector<std::string>(item.second);
+        }
+
+        // Добавить переопределения из секции [Added Associations]
+        for (const auto &item: overrides_list->added_associations) {
+            if (temporary_associations.find(item.first) == temporary_associations.end()) {
+                temporary_associations[item.first] = std::vector<std::string>();
             }
-            mime_cache->associations[item.first].insert(mime_cache->associations[item.first].begin(),
-                                                        item.second.begin(), item.second.end());
+            for (const auto &association: item.second) {
+                if (std::find(temporary_associations[item.first].begin(), temporary_associations[item.first].end(),
+                              association) == temporary_associations[item.first].end()) {
+                    temporary_associations[item.first].emplace_back(association);
+                }
+            }
+        }
+
+        // Внести изменения в исходный список
+        for (const auto &association: temporary_associations) {
+            if (mime_cache->associations.find(association.first) == mime_cache->associations.end()) {
+                mime_cache->associations[association.first] = std::vector<std::string>();
+            }
+
+            // Удалить повторяющиеся элементы
+            for (const auto &desktop_file_name: association.second) {
+                mime_cache->associations[association.first].erase(
+                        std::remove(mime_cache->associations[association.first].begin(),
+                                    mime_cache->associations[association.first].end(), desktop_file_name),
+                        mime_cache->associations[association.first].end());
+            }
+
+            // Объединить два списка... исходный должен уйти в конец
+            mime_cache->associations[association.first].insert(mime_cache->associations[association.first].begin(),
+                                                               association.second.begin(), association.second.end());
         }
 
         // Применить секцию [Removed Associations]
@@ -29,16 +59,6 @@ namespace mime {
                     }
                 }
             }
-        }
-
-        // Добавить переопределения из секции [Added Associations]
-        for (const auto &item: overrides_list->added_associations) {
-            auto iterator = mime_cache->associations.find(item.first);
-            if (mime_cache->associations.find(item.first) == mime_cache->associations.end()) {
-                mime_cache->associations[item.first] = std::vector<std::string>();
-            }
-            mime_cache->associations[item.first].insert(mime_cache->associations[item.first].begin(),
-                                                        item.second.begin(), item.second.end());
         }
 
         // Удалить пустые ассоциации MIME-типов

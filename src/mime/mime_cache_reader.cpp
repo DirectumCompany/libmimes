@@ -27,51 +27,55 @@ namespace mime {
     }
 
     mime_cache *mime_cache_reader::get_actual_cache() {
+        time_t last_modification_date = 0;
+        std::vector<std::string> pathes;
+        auto cache_exists = helpers::file::is_exists(helpers::environment::mime_cache_file_path);
         if (helpers::file::is_exists(helpers::environment::mime_cache_file_path)) {
-            auto last_modification_date =
+            last_modification_date =
                     helpers::file::get_last_modification_date(helpers::environment::mime_cache_file_path);
+
+
             if (!m_mime_cache || m_mime_cache_last_modification_date < last_modification_date) {
-                destroy_cache();
+
                 m_mime_cache_last_modification_date = last_modification_date;
                 m_mime_cache = mime::mime_cache_parser::parse_file(helpers::environment::mime_cache_file_path);
             }
         } else {
-            // Если кэш недоступен, вычислим его сами
-            // Получить список актуальных путей
-            std::vector<std::string> pathes;
             if (helpers::file::is_exists(helpers::environment::distribution_defaults_apps_path)) {
                 pathes.emplace_back(helpers::environment::distribution_defaults_apps_path);
             }
             if (helpers::file::is_exists(helpers::environment::distribution_mime_apps_path)) {
                 pathes.emplace_back(helpers::environment::distribution_mime_apps_path);
             }
-            if (helpers::file::is_exists(helpers::environment::compute_deferred_user_overrides_mime_apps_path())) {
-                pathes.emplace_back(helpers::environment::compute_deferred_user_overrides_mime_apps_path());
-            }
-            if (helpers::file::is_exists(helpers::environment::compute_user_overrides_mime_apps_path())) {
-                pathes.emplace_back(helpers::environment::compute_user_overrides_mime_apps_path());
-            }
+        }
 
-            // Получить максимальную дату изменения
-            time_t last_modification_date = 0;
-            for (const auto &path: pathes) {
-                auto file_modification_date = helpers::file::get_last_modification_date(path);
-                if (last_modification_date < file_modification_date) {
-                    last_modification_date = file_modification_date;
-                }
+        if (helpers::file::is_exists(helpers::environment::compute_deferred_user_overrides_mime_apps_path())) {
+            pathes.emplace_back(helpers::environment::compute_deferred_user_overrides_mime_apps_path());
+        }
+        if (helpers::file::is_exists(helpers::environment::compute_user_overrides_mime_apps_path())) {
+            pathes.emplace_back(helpers::environment::compute_user_overrides_mime_apps_path());
+        }
+        for (const auto &path: pathes) {
+            auto file_modification_date = helpers::file::get_last_modification_date(path);
+            if (last_modification_date < file_modification_date) {
+                last_modification_date = file_modification_date;
             }
+        }
 
-            // Если хотя бы один из файлов был изменен, необходимо актуализировать кэш
-            if (m_mime_cache_last_modification_date < last_modification_date) {
-                destroy_cache();
-                m_mime_cache_last_modification_date = last_modification_date;
+        if (m_mime_cache_last_modification_date < last_modification_date) {
+            destroy_cache();
+            if (cache_exists) {
+                m_mime_cache = mime::mime_cache_parser::parse_file(helpers::environment::mime_cache_file_path);
+            } else {
                 m_mime_cache = new mime_cache();
-
-                for (const auto &path: pathes) {
-                    auto applications_list = mime_applications_parser::parse_file(path);
-                    mime_cache_builder::apply_overrides(m_mime_cache, applications_list);
-                }
             }
+
+            for (const auto &path: pathes) {
+                auto applications_list = mime_applications_parser::parse_file(path);
+                mime_cache_builder::apply_overrides(m_mime_cache, applications_list);
+            }
+
+            m_mime_cache_last_modification_date = last_modification_date;
         }
 
         return m_mime_cache;

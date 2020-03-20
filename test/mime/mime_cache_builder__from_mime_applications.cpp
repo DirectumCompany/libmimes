@@ -55,7 +55,7 @@ TEST(mime_cache_builder__from_mime_applications, add_application) {
     auto result = std::shared_ptr<mime::mime_cache>(mime::mime_cache_builder::from_mime_applications(applications));
     delete applications;
     std::map<std::string, std::vector<std::string>> expected_result = {
-            {"text/plain", {"notepad", "gedit"}}
+            {"text/plain", {"gedit", "notepad"}}
     };
     ASSERT_EQ(result->associations, expected_result);
 }
@@ -70,13 +70,45 @@ TEST(mime_cache_builder__from_mime_applications, all_sections) {
     };
     applications->added_associations = {
             {"text/plain", {"vscode"}},
-            {"pdf", {"ocular"}}
+            {"pdf",        {"ocular"}}
     };
     auto result = std::shared_ptr<mime::mime_cache>(mime::mime_cache_builder::from_mime_applications(applications));
     delete applications;
     std::map<std::string, std::vector<std::string>> expected_result = {
             {"text/plain", {"vscode"}},
-            {"pdf", {"ocular"}}
+            {"pdf",        {"ocular"}}
+    };
+    ASSERT_EQ(result->associations, expected_result);
+}
+
+TEST(mime_cache_builder__from_mime_applications, application_in_multiple_sections) {
+    auto applications = new mime::mime_applications();
+    applications->default_applications = {
+            {"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", {"calc.desktop"}}
+    };
+    applications->added_associations = {
+            {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    {
+                            "openoffice4-calc.desktop",
+                            "r7-office-desktopeditors.desktop",
+                            "calc.desktop",
+                            "myoffice-table.desktop"
+                    }
+            }
+    };
+    auto result = std::shared_ptr<mime::mime_cache>(mime::mime_cache_builder::from_mime_applications(applications));
+    delete applications;
+    std::map<std::string, std::vector<std::string>> expected_result = {
+            {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    {
+                            "calc.desktop",
+                            "openoffice4-calc.desktop",
+                            "r7-office-desktopeditors.desktop",
+                            "myoffice-table.desktop"
+                    }
+            }
     };
     ASSERT_EQ(result->associations, expected_result);
 }
