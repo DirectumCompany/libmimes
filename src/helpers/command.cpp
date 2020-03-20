@@ -15,19 +15,19 @@ namespace helpers {
     }
 
     void command::add_param(const std::string &name, const std::string &value) {
-        m_params.emplace_back(std::make_pair(name , value));
+        m_params.emplace_back(command_parameter{name, value});
     }
 
     std::string command::get_command_text() {
         std::string command_text = m_command;
 
         if (!m_params.empty()) {
-            for (const auto &pair: m_params) {
-                if (!pair.first.empty()) {
-                    command_text += " " + pair.first;
+            for (const auto &parameter: m_params) {
+                if (!parameter.name.empty()) {
+                    command_text += " " + parameter.name;
                 }
-                if (!pair.second.empty()) {
-                    command_text += " " + pair.second;
+                if (!parameter.value.empty()) {
+                    command_text += " " + parameter.value;
                 }
             }
         }

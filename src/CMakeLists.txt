@@ -9,6 +9,7 @@ set(SOURCES
         exceptions/file_stat_read_exception.cpp exceptions/file_stat_read_exception.hpp
         exceptions/get_command_result_exception.cpp exceptions/get_command_result_exception.hpp
         helpers/command.cpp helpers/command.hpp
+        helpers/command_parameter.hpp
         helpers/directory.cpp helpers/directory.hpp
         helpers/environment.cpp helpers/environment.hpp
         helpers/file.cpp helpers/file.hpp

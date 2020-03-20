@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "command_parameter.hpp"
+
 namespace helpers {
     /**
      * Команда для исполнения в терминале.
@@ -56,7 +58,7 @@ namespace helpers {
         /**
          * Список параметров команды.
          */
-        std::vector<std::pair<std::string, std::string>> m_params;
+        std::vector<command_parameter> m_params;
     };
 }
 
