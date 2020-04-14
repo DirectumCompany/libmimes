@@ -38,29 +38,29 @@ namespace helpers {
         static std::string compute_user_application_folder();
 
         /**
-         * Путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
+         * Получить путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
          */
-        static const std::string distribution_defaults_apps_path;
+        static const std::string &get_distribution_defaults_apps_path();
 
         /**
-         * Путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
+         * Получить путь к файлу с переопределениями предоставляемые дистрибутивом по умолчанию.
          */
-        static const std::string distribution_mime_apps_path;
+        static const std::string &get_distribution_mime_apps_path();
 
         /**
-         * Путь к файлу кэша ассоциаций MIME-типов.
+         * Получить путь к файлу кэша ассоциаций MIME-типов.
          */
-        static const std::string mime_cache_file_path;
+        static const std::string &get_mime_cache_file_path();
 
         /**
-         * Путь к системной папке приложений.
+         * Получить путь к системной папке приложений.
          */
-        static const std::string system_application_path;
+        static const std::string &get_system_application_path();
 
         /**
-         * Путь к системной папке базы MIME-типов.
+         * Получить путь к системной папке базы MIME-типов.
          */
-        static const std::string system_mime_database_path;
+        static const std::string &get_system_mime_database_path();
 
 
     };

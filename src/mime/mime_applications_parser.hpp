@@ -15,12 +15,14 @@ namespace mime {
          * @param file_path Абсолютный путь к файлу.
          * @return Список ассоциаций из файла.
          */
-        static mime_applications* parse_file(const std::string &file_path);
+        static mime_applications *parse_file(const std::string &file_path);
 
     private:
-        static const std::string added_associations_section_name;
-        static const std::string removed_associations_section_name;
-        static const std::string default_applications_section_name;
+        static const std::string &m_get_added_associations_section_name();
+
+        static const std::string &m_get_default_applications_section_name();
+
+        static const std::string &m_get_removed_associations_section_name();
     };
 }
 

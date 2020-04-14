@@ -16,16 +16,17 @@ namespace desktop {
          * @return Разобранный файл *.desktop
          */
         static desktop_entry parse_file(const std::string &file_path);
+
     private:
         /**
-         * Заголовок desktop-файла.
+         * Получить заголовок desktop-файла.
          */
-        static const std::string m_desktop_entry_header;
+        static const std::string &m_get_desktop_entry_header();
 
         /**
-         * Наименование свойства, хранящего список обрабатываемых MIME-типов.
+         * Получить наименование свойства, хранящего список обрабатываемых MIME-типов.
          */
-        static const std::string m_mime_type_property_name;
+        static const std::string &m_get_mime_type_property_name();
     };
 }
 

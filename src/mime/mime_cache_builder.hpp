@@ -15,7 +15,7 @@ namespace mime {
          * @param mime_cache Текущий кэш.
          * @param overrides_list Список ассоциаций для переопределения.
          */
-        static void apply_overrides(mime_cache *const mime_cache, const mime_applications *const overrides_list);
+        static void apply_overrides(mime_cache *mime_cache, const mime_applications *overrides_list);
 
         /**
          * Получить кэш из списка ассоциаций.

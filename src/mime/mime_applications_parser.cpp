@@ -8,10 +8,6 @@
 
 namespace mime {
 
-    const std::string mime_applications_parser::added_associations_section_name = "[Added Associations]";
-    const std::string mime_applications_parser::removed_associations_section_name = "[Removed Associations]";
-    const std::string mime_applications_parser::default_applications_section_name = "[Default Applications]";
-
     mime_applications *mime_applications_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
             throw exceptions::cannot_found_exception(file_path);
@@ -23,11 +19,11 @@ namespace mime {
 
         while (getline(mime_apps_file, token)) {
             if (!token.empty()) {
-                if (token == added_associations_section_name) {
+                if (token == m_get_added_associations_section_name()) {
                     current_section = mime_applications_file_section::added_associations;
-                } else if (token == removed_associations_section_name) {
+                } else if (token == m_get_removed_associations_section_name()) {
                     current_section = mime_applications_file_section::removed_associations;
-                } else if (token == default_applications_section_name) {
+                } else if (token == m_get_default_applications_section_name()) {
                     current_section = mime_applications_file_section::default_applications;
                 } else {
                     auto items = parse_string(token);
@@ -50,4 +46,18 @@ namespace mime {
         return result;
     }
 
+    const std::string& mime_applications_parser::m_get_added_associations_section_name() {
+        static const std::string added_associations_section_name = "[Added Associations]";
+        return added_associations_section_name;
+    }
+
+    const std::string& mime_applications_parser::m_get_removed_associations_section_name() {
+        static const std::string removed_associations_section_name = "[Removed Associations]";
+        return removed_associations_section_name;
+    }
+
+    const std::string& mime_applications_parser::m_get_default_applications_section_name() {
+        static const std::string default_applications_section_name = "[Default Applications]";
+        return default_applications_section_name;
+    }
 }

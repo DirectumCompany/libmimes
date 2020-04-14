@@ -12,7 +12,7 @@ namespace desktop {
 
         // Получить приложения из папки пользователя
         std::vector<std::string> paths{helpers::environment::compute_user_application_folder(),
-                                       helpers::environment::system_application_path};
+                                       helpers::environment::get_system_application_path()};
 
         for (const auto &directory_path: paths) {
             if (helpers::directory::is_exists(directory_path)) {

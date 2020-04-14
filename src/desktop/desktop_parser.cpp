@@ -8,9 +8,6 @@
 
 namespace desktop {
 
-    const std::string desktop_parser::m_desktop_entry_header = "[Desktop Entry]";
-    const std::string desktop_parser::m_mime_type_property_name = "MimeType";
-
     desktop_entry desktop_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
             throw exceptions::cannot_found_exception(file_path);
@@ -22,9 +19,9 @@ namespace desktop {
         std::string row;
 
         while (getline(desktop_file_stream, row)) {
-            if (!row.empty() && row != m_desktop_entry_header) {
+            if (!row.empty() && row != m_get_desktop_entry_header()) {
                 auto tokens = helpers::string::split(row, '=');
-                if (tokens.size() > 1 && tokens[0] == m_mime_type_property_name) {
+                if (tokens.size() > 1 && tokens[0] == m_get_mime_type_property_name()) {
                     result.supported_mime_types = helpers::string::split(tokens[1], ';');
                 }
             }
@@ -32,5 +29,15 @@ namespace desktop {
         desktop_file_stream.close();
 
         return result;
+    }
+
+    const std::string &desktop_parser::m_get_desktop_entry_header() {
+        static const std::string desktop_entry_header = "[Desktop Entry]";
+        return desktop_entry_header;
+    }
+
+    const std::string &desktop_parser::m_get_mime_type_property_name() {
+        static const std::string mime_type_property_name = "MimeType";
+        return mime_type_property_name;
     }
 }

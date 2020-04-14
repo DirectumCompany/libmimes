@@ -21,7 +21,7 @@ namespace mime {
         /**
          * Заголовок основной секции файла mimeapps.list
          */
-        static const std::string m_mime_cache_header;
+        static const std::string& m_get_mime_cache_header();
     };
 }
 

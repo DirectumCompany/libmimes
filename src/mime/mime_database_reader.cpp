@@ -21,10 +21,10 @@ namespace mime {
     }
 
     std::map<std::string, std::string> mime_database_reader::get_actual_database() {
-        if (helpers::directory::is_exists(helpers::environment::system_mime_database_path)) {
+        if (helpers::directory::is_exists(helpers::environment::get_system_mime_database_path())) {
             // Получить список файлов для анализа
             auto mime_database_files = helpers::directory::get_file_names(
-                    helpers::environment::system_mime_database_path,
+                    helpers::environment::get_system_mime_database_path(),
                     ".xml");
 
             // Проверить необходимость актуализации базы данных
