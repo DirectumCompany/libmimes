@@ -4,7 +4,6 @@
 #include "desktop_parser.hpp"
 #include "../helpers/directory.hpp"
 #include "../helpers/environment.hpp"
-#include "../helpers/path.hpp"
 
 namespace desktop {
 

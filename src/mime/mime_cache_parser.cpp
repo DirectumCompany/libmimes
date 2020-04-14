@@ -4,7 +4,6 @@
 
 #include "../exceptions/cannot_found_exception.hpp"
 #include "../helpers/file.hpp"
-#include "../helpers/string.hpp"
 
 namespace mime {
 

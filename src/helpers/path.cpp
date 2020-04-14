@@ -1,6 +1,5 @@
 #include "path.hpp"
 
-#include <algorithm>
 #include <dirent.h>
 #include <cstdio>
 #include <unistd.h>

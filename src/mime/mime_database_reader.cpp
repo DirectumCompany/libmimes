@@ -5,7 +5,6 @@
 #include "../helpers/directory.hpp"
 #include "../helpers/environment.hpp"
 #include "../helpers/file.hpp"
-#include "../helpers/path.hpp"
 #include "mime_database_file_parser.hpp"
 
 namespace mime {
