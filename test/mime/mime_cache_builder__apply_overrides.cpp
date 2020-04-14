@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 
 #include "mime/mime_applications.hpp"
 #include "mime/mime_cache.hpp"
@@ -19,7 +20,7 @@
  */
 TEST(mime_cache_builder__apply_overrides, two_files) {
     // Подготовить системный кэш
-    auto system_cache = new mime::mime_cache();
+    auto system_cache = std::make_unique<mime::mime_cache>();
     system_cache->associations.insert({
         "application/vnd.oasis.opendocument.spreadsheet",
         {
@@ -30,7 +31,7 @@ TEST(mime_cache_builder__apply_overrides, two_files) {
     });
 
     // Подготовить пользовательское переопределение
-    auto user_applications = new mime::mime_applications();
+    auto user_applications = std::make_unique<mime::mime_applications>();
     user_applications->default_applications.insert({
         "application/vnd.oasis.opendocument.spreadsheet",
         {
@@ -47,7 +48,7 @@ TEST(mime_cache_builder__apply_overrides, two_files) {
             "myoffice-table.desktop"
         }
     });
-    mime::mime_cache_builder::apply_overrides(system_cache, user_applications);
+    mime::mime_cache_builder::apply_overrides(system_cache.get(), user_applications.get());
     std::map<std::string, std::vector<std::string>> expected_result = {
             {
                     "application/vnd.oasis.opendocument.spreadsheet",
