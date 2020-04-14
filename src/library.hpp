@@ -37,6 +37,6 @@ namespace library {
      * @return Подходящие приложения.
      */
     std::vector<std::string> find_associated_application_from_desktop_files(const std::string &mime_type);
-};
+}
 
 #endif //MIMES_LIBRARY_HPP
