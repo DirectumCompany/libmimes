@@ -1,7 +1,7 @@
 #include "desktop_parser.hpp"
 
 #include <fstream>
-#include "../exceptions/cannot_found_exception.hpp"
+#include "../exceptions/not_found_exception.hpp"
 #include "../helpers/file.hpp"
 #include "../helpers/path.hpp"
 #include "../helpers/string.hpp"
@@ -10,7 +10,7 @@ namespace desktop {
 
     desktop_entry desktop_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
-            throw exceptions::cannot_found_exception(file_path);
+            throw exceptions::not_found_exception(file_path);
 
         desktop_entry result;
         result.file_name = helpers::path::extract_file_name(file_path);

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <dirent.h>
-#include "../exceptions/cannot_found_exception.hpp"
+#include "../exceptions/not_found_exception.hpp"
 #include "../helpers/string.hpp"
 #include "path.hpp"
 
@@ -20,7 +20,7 @@ namespace helpers {
     std::vector<std::string>
     directory::get_file_names(const std::string &directory_path, const std::string &extension) {
         if (!helpers::directory::is_exists(directory_path))
-            throw exceptions::cannot_found_exception(directory_path);
+            throw exceptions::not_found_exception(directory_path);
 
         std::vector<std::string> result;
 

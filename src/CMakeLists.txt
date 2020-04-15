@@ -5,7 +5,7 @@ set(SOURCES
         desktop/desktop_parser.cpp desktop/desktop_parser.hpp
         exceptions/base_exception.cpp exceptions/base_exception.hpp
         exceptions/execute_command_failed_exception.cpp exceptions/execute_command_failed_exception.hpp
-        exceptions/cannot_found_exception.cpp exceptions/cannot_found_exception.hpp
+        exceptions/not_found_exception.cpp exceptions/not_found_exception.hpp
         exceptions/file_stat_read_exception.cpp exceptions/file_stat_read_exception.hpp
         exceptions/get_command_result_exception.cpp exceptions/get_command_result_exception.hpp
         helpers/command.cpp helpers/command.hpp

@@ -2,14 +2,14 @@
 
 #include <fstream>
 
-#include "../exceptions/cannot_found_exception.hpp"
+#include "../exceptions/not_found_exception.hpp"
 #include "../helpers/file.hpp"
 
 namespace mime {
 
     mime_cache* mime_cache_parser::parse_file(const std::string &file_path) {
         if (!helpers::file::is_exists(file_path))
-            throw exceptions::cannot_found_exception(file_path);
+            throw exceptions::not_found_exception(file_path);
 
         auto result = new mime_cache();
 

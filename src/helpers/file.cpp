@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sys/stat.h>
 
-#include "../exceptions/cannot_found_exception.hpp"
+#include "../exceptions/not_found_exception.hpp"
 #include "../exceptions/file_stat_read_exception.hpp"
 #include "../helpers/command.hpp"
 #include "../helpers/string.hpp"
@@ -19,7 +19,7 @@ namespace helpers {
 
     std::string file::get_mime_type(const std::string &file_path) {
         if (!is_exists(file_path))
-            throw exceptions::cannot_found_exception(file_path);
+            throw exceptions::not_found_exception(file_path);
 
         // Получить результат выполнения команды file -i <file_path>
         helpers::command command("file");
@@ -32,7 +32,7 @@ namespace helpers {
 
     time_t file::get_last_modification_date(const std::string &file_path) {
         if (!is_exists(file_path))
-            throw exceptions::cannot_found_exception(file_path);
+            throw exceptions::not_found_exception(file_path);
 
         struct stat result{};
         if (stat(file_path.c_str(), &result) == 0) {
