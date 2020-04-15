@@ -13,7 +13,7 @@ set(SOURCES
         helpers/directory.cpp helpers/directory.hpp
         helpers/environment.cpp helpers/environment.hpp
         helpers/file.cpp helpers/file.hpp
-        helpers/path.cpp helpers/path.hpp
+        helpers/path.cpp helpers/path.hpp helpers/path.ipp
         helpers/string.cpp helpers/string.hpp
         mime/base_parser.cpp mime/base_parser.hpp
         mime/mime_applications.hpp

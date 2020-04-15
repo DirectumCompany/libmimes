@@ -40,11 +40,7 @@ namespace helpers {
          * @return Результат объединения. Функция производит чистку от дублирующихся разделителей.
          */
         template<typename ...Ts>
-        static std::string join(const std::string &first, const Ts &... other) {
-            std::string result = first + m_delimiter + join(other...);
-            remove_double_delimiter(result);
-            return result;
-        }
+        static std::string join(const std::string &first, const Ts &... other);
 
         /**
          * Замыкание вариативного шаблона объединения путей.
@@ -69,5 +65,6 @@ namespace helpers {
     };
 }
 
+#include "path.ipp"
 
 #endif //LIBMIMES_PATH_HPP

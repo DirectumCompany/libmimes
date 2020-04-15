@@ -62,7 +62,6 @@ namespace helpers {
          */
         static const std::string &get_system_mime_database_path();
 
-
     };
 }
 
