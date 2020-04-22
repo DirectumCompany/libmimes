@@ -12,7 +12,10 @@ set(SOURCES
         helpers/command_parameter.hpp
         helpers/directory.cpp helpers/directory.hpp
         helpers/environment.cpp helpers/environment.hpp
+        helpers/file_mime_utility.cpp helpers/file_mime_utility.hpp
         helpers/file.cpp helpers/file.hpp
+        helpers/gio_mime_utility.cpp helpers/gio_mime_utility.hpp
+        helpers/mime_utility.cpp helpers/mime_utility.hpp
         helpers/path.cpp helpers/path.hpp helpers/path.ipp
         helpers/string.cpp helpers/string.hpp
         mime/base_parser.cpp mime/base_parser.hpp

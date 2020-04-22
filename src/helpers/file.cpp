@@ -6,8 +6,10 @@
 
 #include "../exceptions/not_found_exception.hpp"
 #include "../exceptions/file_stat_read_exception.hpp"
-#include "../helpers/command.hpp"
 #include "../helpers/string.hpp"
+#include "mime_utility.hpp"
+#include "file_mime_utility.hpp"
+#include "gio_mime_utility.hpp"
 
 namespace helpers {
 
@@ -22,22 +24,21 @@ namespace helpers {
         if (!is_exists(file_path))
             throw exceptions::not_found_exception(file_path);
 
-        // Получить результат выполнения команды file -i <file_path>
-        helpers::command command("file");
-        command.add_param("-i", "\"" + file_path + "\"");
-        auto command_result = command.execute();
-        return file::extract_mime_type(command_result);
-    }
+        std::vector<mime_utility *> mime_utilities = {
+                new gio_mime_utility(),
+                new file_mime_utility(),
+        };
 
-    std::string file::extract_mime_type(const std::string &source) {
-        std::regex regexp(R"(:\s[\w.-]+\/[\w.+-]+)");
-        std::smatch matches;
-        std::regex_search(source, matches, regexp);
         std::string result;
-        if (!matches.empty()) {
-            result = matches[0];
-            return result.substr(2);
+        for (auto &utility: mime_utilities) {
+            if (utility->is_available()) {
+                result = utility->get_mime_type(file_path);
+                if (!result.empty())
+                    break;
+            }
+            delete utility;
         }
+
         return result;
     }
 
