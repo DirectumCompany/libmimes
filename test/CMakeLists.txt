@@ -6,6 +6,7 @@ set(SOURCES
         helpers/command__execute.cpp
         helpers/directory__get_file_names.cpp
         helpers/directory__is_exitst.cpp
+        helpers/file__extract_mime_type.cpp
         helpers/file__get_mime_type.cpp
         helpers/file__is_exists.cpp
         helpers/path__extract_file_extension.cpp

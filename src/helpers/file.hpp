@@ -26,6 +26,14 @@ namespace helpers {
         static std::string get_mime_type(const std::string &file_path);
 
         /**
+         * Извлечь MIME-тип из вывода команды file -i.
+         *
+         * @param source Вывод команды file -i.
+         * @return MIME-тип.
+         */
+        static std::string extract_mime_type(const std::string& source);
+
+        /**
          * Получить время последнего изменения файла.
          *
          * @param file_path Абсолютный путь к файлу.
